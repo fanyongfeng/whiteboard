@@ -20,7 +20,7 @@ class Circle extends ToolBase {
         this.cxt.remove(this.circle);
         this.circle = null;
       };
-      const radius = this.getLineLength(this.downPointer, event[0].pointer)/2;
+      const radius = event[0].pointer.y - this.downPointer.y;
       const options = Object.assign({}, this.style, {
         radius, 
         left: x, 
