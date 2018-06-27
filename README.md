@@ -1,4 +1,0 @@
-# whiteboard
-
-## WEBRTC 
-## Whiteboard

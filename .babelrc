@@ -1,16 +1,10 @@
 {
-  "comments": true,
   "presets": [
-    "react",
-    "stage-1",
-    "react-app",
-    "es2015",
-     ["env", {
+    ["@babel/preset-env", {
+      "modules": false,
       "targets": {
-        "android": "4.4"
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
       }
-    }],
-    "react-native-stage-0/decorator-support"
-  ],
-  "plugins": ["babel-polyfill", "transform-decorators-legacy", "transform-class-properties"]
+    }]
+  ]
 }
