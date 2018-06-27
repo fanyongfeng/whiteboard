@@ -36,7 +36,7 @@ class whiteboard {
     this.toolGroup = new Tools(this.canvas, {
       borderColor: '#00B8FC',
       cornerColor: '#FF4B59',
-      cornerSize: 1,
+      cornerSize: 6,
       strokeWidth: 1,
       stroke: '#000000',
       hasControls: false,

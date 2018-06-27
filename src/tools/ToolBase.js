@@ -15,6 +15,7 @@ class ToolBase {
     this.cxt = canvas;
     this.style = style;
     this.isMouseDown = false;
+    this.isSelected = false;
   }
 
   onMousedownHandle(event) {
@@ -47,6 +48,14 @@ class ToolBase {
     if (!path) return;
     pathEvents.forEach(event => {
       path.on(event.origin, this[event.instance]);
+    });
+    path.on('selected', (e) => {
+      this.isSelected = true;
+      path.hasControls = true;
+    });
+    path.on('deselected', (e) => {
+      this.isSelected = false;
+      path.hasControls = false;
     });
   }
 };
