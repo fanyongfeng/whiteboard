@@ -1,5 +1,7 @@
 import ToolBase from './ToolBase';
-import { fabric } from 'fabric';
+import {
+  fabric
+} from 'fabric';
 import toolTypes from '../constants/tools';
 
 class Circle extends ToolBase {
@@ -7,7 +9,7 @@ class Circle extends ToolBase {
     super(...arg);
     this.toolType = toolTypes.CIRCLE;
   }
-  
+
   onMousedownHandle(event) {
     super.onMousedownHandle(event);
     this.downPointer = event[0].pointer;
@@ -15,16 +17,19 @@ class Circle extends ToolBase {
 
   onMouseDragHandle(event) {
     if (!this.isSelected) {
-      const { x, y } = this.downPointer;
+      const {
+        x,
+        y
+      } = this.downPointer;
       if (this.circle) {
         this.cxt.remove(this.circle);
         this.circle = null;
       };
       const radius = event[0].pointer.y - this.downPointer.y;
       const options = Object.assign({}, this.style, {
-        radius, 
-        left: x, 
-        top: y, 
+        radius,
+        left: x,
+        top: y,
       });
       this.circle = new fabric.Circle(options);
       this.renderPath(this.circle);

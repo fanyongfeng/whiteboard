@@ -2,8 +2,10 @@ import {
   findDom
 } from './utils/dom';
 import log from './utils/error';
-import { fabric } from 'fabric';
-
+import {
+  fabric
+} from 'fabric';
+import toolTypes from './constants/tools';
 import Tools from './tools';
 
 const defaultProps = {
@@ -24,7 +26,9 @@ const mouseEvents = [{
 class whiteboard {
   constructor(props) {
     const {
-      id, width = 1000, height = 700
+      id,
+      width = 1000,
+      height = 700
     } = props;
     this.props = props;
     this.originCanvas = findDom(`#${id}`);
@@ -40,9 +44,10 @@ class whiteboard {
       strokeWidth: 1,
       stroke: '#000000',
       hasControls: false,
+      fontSize: 20,
       transparentCorners: true
     });
-    this.currentTool = this.toolGroup.tools[0];
+    this.currentTool = this.toolGroup.tools[1];
     this.bindListener();
     this.checkParams();
   }
@@ -60,16 +65,11 @@ class whiteboard {
         this.currentTool && this.currentTool[item.instance] && this.currentTool[item.instance](arg);
       });
     })
-    this.canvas.on('path:created', (path) => {
-    });
-    this.canvas.on('selection:created', (path) => {
-    })
-    this.canvas.on('object:moving', (path) => {
-    });
-    this.canvas.on('object:rotating', (path) => {
-    });
-    this.canvas.on('object:skewing', (path) => {
-    })
+    this.canvas.on('path:created', (path) => {});
+    this.canvas.on('selection:created', (path) => {})
+    this.canvas.on('object:moving', (path) => {});
+    this.canvas.on('object:rotating', (path) => {});
+    this.canvas.on('object:skewing', (path) => {})
   }
 
   checkParams() {

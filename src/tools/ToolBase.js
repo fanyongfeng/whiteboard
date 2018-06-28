@@ -1,4 +1,4 @@
-
+import uniqueId from 'lodash/uniqueId';
 const pathEvents = [{
   origin: 'moving',
   instance: 'onMovingHandle'
@@ -16,6 +16,15 @@ class ToolBase {
     this.style = style;
     this.isMouseDown = false;
     this.isSelected = false;
+    this.bindEvent();
+  }
+
+  bindEvent() {
+    // this.cxt.on('text:changed', ({
+    //   target
+    // }) => {
+    //   console.log(target.text);
+    // });
   }
 
   onMousedownHandle(event) {
@@ -32,15 +41,19 @@ class ToolBase {
     }
   }
 
-  onMovingHandle(e) {
-  }
-  onRotatingHandle(e) {
-  }
-  onScalingHandle(e) {
+  onMouseDragHandle(event) {
+
   }
 
+  onMovingHandle(e) {}
+  onRotatingHandle(e) {}
+  onScalingHandle(e) {}
+
   renderPath(path) {
+    if (!path) return;
+    path.id = uniqueId('wbPath');
     this.cxt.add(path);
+    debugger
     this.bindEvent(path);
   }
 

@@ -1,19 +1,20 @@
 import Circle from './Circle';
+import Text from './Text';
 
 class Tools {
   constructor(canvas, style) {
     this.cxt = canvas;
     this.style = Object.assign({}, {
-      fill: 'transparent', 
+      fill: 'transparent',
     }, style);
     this.initTools();
   }
 
   initTools() {
-    this.toolList = [new Circle(this.cxt, this.style)];
+    this.toolList = [new Circle(this.cxt, this.style), new Text(this.cxt, this.style)];
   }
 
-  get tools () {
+  get tools() {
     return this.toolList;
   }
 }
