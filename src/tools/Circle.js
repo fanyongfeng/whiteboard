@@ -20,12 +20,24 @@ class Circle extends ToolBase {
         this.cxt.remove(this.circle);
         this.circle = null;
       };
-      const radius = event[0].pointer.y - this.downPointer.y;
-      const options = Object.assign({}, this.style, {
-        radius, 
+      const radius = Math.abs(event[0].pointer.y - this.downPointer.y);
+      let beginPointer = {
         left: x, 
         top: y, 
+      }
+      console.log(this.direction)
+      if (this.direction === ('leftTop' || 'leftBottom')) {
+        beginPointer = {
+          left: event[0].pointer.x, 
+          top: event[0].pointer.y, 
+        }
+      }
+      const options = Object.assign({}, this.style, {
+        radius, 
+        left: beginPointer.left, 
+        top: beginPointer.top, 
       });
+
       this.circle = new fabric.Circle(options);
       this.renderPath(this.circle);
     }

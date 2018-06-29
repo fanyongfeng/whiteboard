@@ -27,6 +27,16 @@ class ToolBase {
   }
 
   onMousemoveHandle(event) {
+    const { movementX, movementY } = event[0].e;
+    if (movementX < 0 && movementY < 0) {
+      this.direction = 'leftTop';
+    } else if (movementX < 0 && movementY > 0) {
+      this.direction = 'leftBottom';
+    } else if (movementX > 0 && movementY < 0) {
+      this.direction = 'rightTop';
+    } else if (movementX > 0 && movementY > 0) {
+      this.direction = 'rightBottom';
+    }
     if (this.isMouseDown) {
       this.onMouseDragHandle(event);
     }
