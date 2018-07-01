@@ -1,19 +1,11 @@
-import ToolBase from './ToolBase';
-import {
-  fabric
-} from 'fabric';
+import FreeBrush from './FreeBrush';
+
 import toolTypes from '../constants/tools';
 
-class Eraser extends ToolBase {
+class Eraser extends FreeBrush {
   constructor(...arg) {
-    super(...arg);
+    super(...arg, (path) => path.selectable = false);
     this.toolType = toolTypes.ERASER;
-    this.cxt.on('path:created', (object) => {
-      if (this.toolActive) {
-        object.path.selectable = false;
-        this.renderPath(object.path, true);
-      }
-    });
   }
 
   set selected(selected) {
