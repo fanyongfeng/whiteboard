@@ -1,5 +1,7 @@
 import Circle from './Circle';
 import Text from './Text';
+import Line from './Line';
+import MarkPen from './MarkPen';
 
 class Tools {
   constructor(canvas, style) {
@@ -11,14 +13,17 @@ class Tools {
   }
 
   initTools() {
-    this.toolList = [new Circle(this.cxt, this.style), new Text(this.cxt, this.style)];
+    this.toolList = [
+      new Circle(this.cxt, this.style),
+      new Text(this.cxt, this.style),
+      new Line(this.cxt, this.style),
+      new MarkPen(this.cxt, this.style)
+    ];
   }
 
   get tools() {
     return this.toolList;
   }
 }
-
-
 
 export default Tools;

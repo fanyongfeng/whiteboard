@@ -1,4 +1,7 @@
 import uniqueId from 'lodash/uniqueId';
+import {
+  fabric
+} from 'fabric';
 const pathEvents = [{
   origin: 'moving',
   instance: 'onMovingHandle'
@@ -19,6 +22,16 @@ class ToolBase {
     this.bindEvent();
   }
 
+  drawJSON(data) {
+    fabric.Line.fromObject(data, () => {
+
+    });
+  }
+
+  set selected(selected) {
+    this.toolActive = selected;
+  }
+
   bindEvent() {
     // this.cxt.on('text:changed', ({
     //   target
@@ -36,7 +49,10 @@ class ToolBase {
   }
 
   onMousemoveHandle(event) {
-    const { movementX, movementY } = event[0].e;
+    const {
+      movementX,
+      movementY
+    } = event[0].e;
     if (movementX < 0 && movementY < 0) {
       this.direction = 'leftTop';
     } else if (movementX < 0 && movementY > 0) {
@@ -59,10 +75,11 @@ class ToolBase {
   onRotatingHandle(e) {}
   onScalingHandle(e) {}
 
-  renderPath(path) {
+  renderPath(path, ignore = false) {
     if (!path) return;
     path.id = uniqueId('wbPath');
-    this.cxt.add(path);
+    path.toolType = this.toolType;
+    !ignore && this.cxt.add(path);
     this.bindEvent(path);
   }
 
