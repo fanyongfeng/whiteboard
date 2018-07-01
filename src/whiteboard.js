@@ -59,8 +59,7 @@ class whiteboard {
       width: 10
     });
     window.changeTool = this.changeTool;
-    window.currentTool = () => this.currentTool;
-
+    this.changeTool(toolTypes.SELECTOR); // 初始画笔
     this.bindListener();
     this.checkParams();
   }
@@ -85,7 +84,7 @@ class whiteboard {
         itemTool.selected = false;
       }
     });
-    console.log(this.currentTool)
+    return this.currentTool
   }
   /**
    * 

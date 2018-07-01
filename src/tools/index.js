@@ -5,6 +5,7 @@ import Text from './Text';
 import Pen from './Pen';
 import MarkPen from './MarkPen';
 import Eraser from './Eraser';
+import Selector from './Selector';
 
 class Tools {
   constructor(canvas, style) {
@@ -28,7 +29,8 @@ class Tools {
       new Text(this.cxt, this.style),
       new Pen(this.cxt, this.style),
       new MarkPen(this.cxt, this.style),
-      new Eraser(this.cxt, this.style)
+      new Eraser(this.cxt, this.style),
+      new Selector(this.cxt, this.style)
     ];
   }
 
