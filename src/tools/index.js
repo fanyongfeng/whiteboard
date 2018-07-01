@@ -24,14 +24,9 @@ class Tools {
   }
 
   initTools() {
-    this.toolList = [
-      new Circle(this.cxt, this.style),
-      new Text(this.cxt, this.style),
-      new Pen(this.cxt, this.style),
-      new MarkPen(this.cxt, this.style),
-      new Eraser(this.cxt, this.style),
-      new Selector(this.cxt, this.style)
-    ];
+    this.toolList = [Circle, Text, Pen, MarkPen, Eraser, Selector].map(
+      Tool => new Tool(this.cxt, this.style)
+    );
   }
 
   get tools() {
