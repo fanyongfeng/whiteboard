@@ -58,16 +58,25 @@ class whiteboard {
       color: 'rgba(26, 209, 255, .7)',
       width: 10
     });
-    this.currentTool = this.toolGroup.tools[3];
-    window.drawbyjson = () => this.currentTool.drawJSON(this.store.items[0]);
+    window.changeTool = this.changeTool;
+    window.currentTool = () => this.currentTool;
+
     this.bindListener();
     this.checkParams();
   }
 
-  set currentToolInfo(toolInfo) {
-    const {
-      tool
-    } = toolInfo;
+  redo() {
+    this.store.redo();
+  }
+
+  undo() {
+    this.store.undo();
+  }
+
+  /**
+   * tool is one of toolTypes
+   */
+  changeTool = (tool) => {
     forEach(this.toolGroup.tools, (itemTool) => {
       if (tool === itemTool.toolType) {
         this.currentTool = itemTool;
@@ -76,6 +85,33 @@ class whiteboard {
         itemTool.selected = false;
       }
     });
+    console.log(this.currentTool)
+  }
+  /**
+   * 
+   * @param {JASON} data path instance json
+   * draw receive data
+   */
+  drawJSON(data) {
+    this.toolGroup.drawJSON(data);
+  }
+
+  deleteAll() {
+    this.store.clearAll();
+  }
+
+  /**
+   * param[id] path instance id
+   */
+  delete(id) {
+    this.store.delete(id);
+  }
+
+  set currentToolInfo(toolInfo) {
+    const {
+      tool
+    } = toolInfo;
+    this.changeTool(tool);
   }
 
   /**
@@ -99,10 +135,7 @@ class whiteboard {
         id,
         toolType
       } = path;
-      this.store.add(Object.assign(path.toJSON(), {
-        id,
-        toolType
-      }));
+      this.store.add(path);
     });
     this.canvas.on('selection:created', (path) => {})
     this.canvas.on('object:moving', (path) => {});

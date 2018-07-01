@@ -16,7 +16,7 @@ class Circle extends ToolBase {
   }
 
   onMouseDragHandle(event) {
-    if (!this.isSelected) {
+    if (!this.hasSelected) {
       const {
         x,
         y
@@ -27,20 +27,19 @@ class Circle extends ToolBase {
       };
       const radius = Math.abs(event[0].pointer.y - this.downPointer.y);
       let beginPointer = {
-        left: x, 
-        top: y, 
+        left: x,
+        top: y,
       }
-      console.log(this.direction)
       if (this.direction === ('leftTop' || 'leftBottom')) {
         beginPointer = {
-          left: event[0].pointer.x, 
-          top: event[0].pointer.y, 
+          left: event[0].pointer.x,
+          top: event[0].pointer.y,
         }
       }
       const options = Object.assign({}, this.style, {
-        radius, 
-        left: beginPointer.left, 
-        top: beginPointer.top, 
+        radius,
+        left: beginPointer.left,
+        top: beginPointer.top,
       });
 
       this.circle = new fabric.Circle(options);

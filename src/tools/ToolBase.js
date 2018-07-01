@@ -2,6 +2,7 @@ import uniqueId from 'lodash/uniqueId';
 import {
   fabric
 } from 'fabric';
+
 const pathEvents = [{
   origin: 'moving',
   instance: 'onMovingHandle'
@@ -18,14 +19,8 @@ class ToolBase {
     this.cxt = canvas;
     this.style = style;
     this.isMouseDown = false;
-    this.isSelected = false;
+    this.hasSelected = false;
     this.bindEvent();
-  }
-
-  drawJSON(data) {
-    fabric.Line.fromObject(data, () => {
-
-    });
   }
 
   set selected(selected) {
@@ -75,11 +70,11 @@ class ToolBase {
   onRotatingHandle(e) {}
   onScalingHandle(e) {}
 
-  renderPath(path, ignore = false) {
+  renderPath(path, ignoreRender = false) {
     if (!path) return;
     path.id = uniqueId('wbPath');
     path.toolType = this.toolType;
-    !ignore && this.cxt.add(path);
+    !ignoreRender && this.cxt.add(path);
     this.bindEvent(path);
   }
 
@@ -89,11 +84,12 @@ class ToolBase {
       path.on(event.origin, this[event.instance]);
     });
     path.on('selected', (e) => {
-      this.isSelected = true;
+      this.hasSelected = true;
+      console.log(path)
       path.hasControls = true;
     });
     path.on('deselected', (e) => {
-      this.isSelected = false;
+      this.hasSelected = false;
       path.hasControls = false;
     });
   }

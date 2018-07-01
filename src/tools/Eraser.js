@@ -4,12 +4,13 @@ import {
 } from 'fabric';
 import toolTypes from '../constants/tools';
 
-class MarkPen extends ToolBase {
+class Eraser extends ToolBase {
   constructor(...arg) {
     super(...arg);
-    this.toolType = toolTypes.MARKPEN;
+    this.toolType = toolTypes.ERASER;
     this.cxt.on('path:created', (object) => {
       if (this.toolActive) {
+        object.path.selectable = false;
         this.renderPath(object.path, true);
       }
     });
@@ -18,15 +19,15 @@ class MarkPen extends ToolBase {
   set selected(selected) {
     this.toolActive = selected;
     if (selected) {
+      this.cxt.freeDrawingBrush.color = '#fff';
       this.cxt.isDrawingMode = true;
     }
   }
 
   set style(style) {
-    this.cxt.freeDrawingBrush.color = style.color;
     this.cxt.freeDrawingBrush.width = style.width;
   }
 
 }
 
-export default MarkPen;
+export default Eraser;

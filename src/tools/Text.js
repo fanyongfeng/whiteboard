@@ -14,7 +14,7 @@ class Text extends ToolBase {
 
   onMousedownHandle(event) {
     super.onMousedownHandle(event);
-    if (!this.isSelected) {
+    if (!this.hasSelected) {
       this.text = new fabric.Textbox(' ', {
         left: event[0].pointer.x,
         top: event[0].pointer.y,
